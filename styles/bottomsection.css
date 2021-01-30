@@ -1,0 +1,92 @@
+.bottom-section {
+    background-color: black;
+    box-sizing: border-box;
+    line-height: 2.5rem;
+    padding: 3rem 5rem;
+    max-width: 100%;
+    min-width: 480px;
+}
+
+
+.title{
+    font-size: 2rem;
+}
+.sorting-bar img {
+    cursor: pointer;
+    width: 1rem;
+}
+
+.sorting-bar span{
+    vertical-align: middle;
+}
+
+.sorting {
+    position: absolute;
+    right: 5rem;
+    font-size: 1.3rem;
+}
+
+.continent-sorting > *{
+    margin:0 0.5rem;
+}
+
+.temperature-sorting > *{
+    margin:0 0.5rem;
+}
+
+.continent-city-list{
+    display: grid;
+    gap:2rem 5rem;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(4,1fr);
+    margin:2rem 0.2rem;
+    width: 100%;
+}
+
+.continent-city{
+    background-color: rgb(54, 54, 54);
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px #c7c7c7;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:0.2rem 0.5rem;   
+}
+
+.continent-city:hover {
+    background:rgb(61, 48, 48) no-repeat 100%;
+    cursor: pointer;
+    transform:scale(1.2);
+}
+
+.continent-name{
+    color:var(--bright-yellow-text);
+    font-size: 1.2rem;
+}
+
+.continent-city-name{
+    font-size: 1.2rem;
+}
+
+.current-city-time{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.continent-city-temperature{
+    font-size: 1.5rem;
+}
+
+.humidity{
+    font-size: 1.2rem;
+}
+
+.continent-sorting img:hover{
+    
+    transform:scale(1.5);
+}
+
+.temperature-sorting img:hover{
+    
+    transform:scale(1.5);
+}

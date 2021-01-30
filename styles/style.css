@@ -1,0 +1,72 @@
+@import url("vars.css");
+@import url("fonts.css");
+@import url("topsection.css");
+@import url("midsection.css");
+@import url("bottomsection.css");
+
+/* Media Queries */
+/* 425px, 768px, 1024px */
+@media screen and (max-width:1024px){
+  .weather-forecast{
+    width:100%;
+  }
+  
+  .sorting{
+    font-size: 1rem;
+  }
+  
+  .title{ 
+    font-size: 1.2rem; 
+  }  
+}
+
+@media screen and (max-width: 768px) {
+    .top-section {
+      flex-direction: column;
+    }
+    
+    .sorting{
+      position:unset;
+      margin: 0 auto;
+    }
+  
+    .sorting-bar{
+      height:auto;
+      text-align: center;    
+    }
+
+    .current-temperature-humity{
+      font-size: 1rem;
+    }
+
+    .continent-city-list{
+      grid-template-columns: repeat(2,auto);
+    }
+
+    .continent-name{
+      font-size:1rem;
+    }
+
+    .continent-city-temperature{
+      font-size:1rem;
+    }
+
+    .continent-city-name , .humidity{
+      font-size: 0.8rem;
+    }
+
+    .humidity img{
+      height:1rem;
+    }
+  }
+
+@media screen and (max-width: 550px) {
+  .continent-city-list{
+    grid-template-columns: auto;
+    font-size: 0.8rem;
+  }
+
+  .sorting-bar p{
+    font-size:1.2rem;
+  }
+}
