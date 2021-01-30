@@ -119,16 +119,16 @@
                     Top cities around world
                 </div>
                 <span class="preference">
-                    <label class="preference-selection-icon">
+                    <label class="radio-icon">
                         <input type="radio" name="preference" value="sunny"  />    
                         <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg" >
                     </label>
-                    <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="snowflake"  />    
+                    <label class="radio-icon">
+                        <input type="radio" name="preference" value="snow"  />    
                         <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg" >
                     </label>
-                    <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="rainy"  checked/>    
+                    <label class="radio-icon">
+                        <input type="radio" name="preference" value="rainy"  />    
                         <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg" >
                     </label>
                     <label class="city-count-selection">
@@ -331,13 +331,13 @@
                     <span class="continent-sorting">
                         <span>Continent Name</span>
                         <span>
-                            <img alt="downarrow" src="./assets/icons/general/arrowDown.svg">
+                            <img alt="downarrow" name="sort-icon" value="continent" src="./assets/icons/general/arrowDown.svg" title='ascending order'>
                         </span>
                     </span>
                     <span class="temperature-sorting">
                         <span>Temperature</span>
-                        <span>
-                            <img alt="uparrow" src="./assets/icons/general/arrowUp.svg">
+                        <span>  
+                            <img alt="uparrow" name="sort-icon" value="temperature"  src="./assets/icons/general/arrowUp.svg" title='descending order'>
                         </span>
                     </span>
                 </span>
@@ -348,14 +348,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p>Delhi,</p>
-                            <p>10:10 AM</p>
+                            <p name="continent-city-name">Delhi,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -363,14 +363,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Africa</p>
                         <div class="current-city-time">
-                            <p> Egypt,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Egypt,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -378,14 +378,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Europe</p>
                         <div class="current-city-time">
-                            <p> London,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> London,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -393,14 +393,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium" >Asia</p>
                         <div class="current-city-time">
-                            <p>Delhi,</p>
-                            <p>10:10 AM</p>
+                            <p name="continent-city-name">Delhi,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -408,14 +408,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium" >Africa</p>
                         <div class="current-city-time">
-                            <p> Egypt,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Egypt,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -423,14 +423,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Europe</p>
                         <div class="current-city-time">
-                            <p> London,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> London,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -438,14 +438,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p>Delhi,</p>
-                            <p>10:10 AM</p>
+                            <p name="continent-city-name">Delhi,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -453,14 +453,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Africa</p>
                         <div class="current-city-time">
-                            <p> Egypt,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Egypt,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -468,14 +468,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">South America</p>
                         <div class="current-city-time">
-                            <p> Brazil,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Brazil,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -483,14 +483,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p>Delhi,</p>
-                            <p>10:10 AM</p>
+                            <p name="continent-city-name">Delhi,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -498,14 +498,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium" >Africa</p>
                         <div class="current-city-time">
-                            <p> Egypt,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Egypt,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
@@ -513,14 +513,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">South America</p>
                         <div class="current-city-time">
-                            <p> Brazil,</p>
-                            <p> 10:10 AM</p>
+                            <p name="continent-city-name"> Brazil,</p>
+                            <p name="continent-city-time">10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
                         </div>
                     </div>
                 </div>
