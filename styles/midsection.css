@@ -102,9 +102,9 @@
   white-space: nowrap;
 }
 
-.card-list > div {
+.city-detail-card {
   background-color: rgb(32, 32, 32);
-  background-image: url("../assets/icons/Cities/newyork.svg");
+  background-image: url("../assets/icons/Cities/nome.svg");
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 60% 60%;
@@ -115,16 +115,21 @@
   line-height: 2rem;
   margin: 1rem 2rem;
   padding: 1rem;
-  width: 13.5rem;
+  width: 15rem;
 }
 
-.card-list > div:hover {
-  animation: background-color 4s;
+.city-detail-card:hover {
+  animation: background-color 3s forwards;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
   transform: scale(1.1);
   z-index: 2;
+}
+
+.city-detail-card:hover * {
+  color: black;
+  font-weight: bold;
 }
 
 @keyframes background-color {
@@ -173,7 +178,9 @@
 }
 
 .city-name {
+  display: inline-block;
   font-size: 1.3rem;
+  width: 60%;
 }
 
 .temperature {
