@@ -83,6 +83,7 @@
 .city-card-scroll {
   margin: 0 1rem;
   overflow-x: scroll;
+  scroll-behavior: smooth;
 }
 
 .card-list {
@@ -198,9 +199,4 @@
 
 .medium {
   font-family: Roboto-medium;
-}
-
-.temperature-detail img,
-.temperature-detail span {
-  vertical-align: middle;
 }
