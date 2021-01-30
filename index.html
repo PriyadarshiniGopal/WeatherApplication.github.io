@@ -8,27 +8,22 @@
         <link rel="shortcut icon" href="./assets/icons/weather/sunnyIcon.svg" type="image/x-icon">
         <link rel="stylesheet"  href="./styles/style.css"/>
         <title>Weather Report</title>
+        <script type="module" src="./scripts/main.js" defer></script>
     </head>
     <body>
         <section class="top-section">
             <div class="city-selection">
                 <!-- City Icon -->
                 <div class="city-icon">
-                    <img alt="city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
+                    <img alt="city-icon" id="selected-city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
                 </div>
                 <!-- City Selection Input -->
-                <form class="selected-city">
-                    <span class="tooltiptext">City selction</span>
+                <form class="selected-city" id="city-name-form">
+                    <span id="error-msg"></span>
                     <input list="city-list" id="city" >
                     <datalist id="city-list">
-                        <option value="Nome">Nome</option>
-                        <option value="NewDelhi">NewDelhi</option>
-                        <option value="Newyork">Newyork</option>
-                        <option value="Jamaica">Jamaica</option>
-                        <option value="Losangeles">Losangeles</option>
-                        <option value="Winnipeg">Winnipeg</option>
-                        <option value="Juba">Juba</option>
                     </datalist>
+                    <span class="tooltiptext">City selction</span>
                 </form>
                 <div class="empty-element">
 
@@ -38,7 +33,7 @@
                     <div class="current-time">
                         <span class="time">10 : 10</span>
                         <span class="sec"> : 44</span>
-                        <img alt="AM" src="./assets/icons/general/amState.svg">
+                        <img alt="AM" id="period" src="./assets/icons/general/amState.svg">
                     </div>
                     <p class="date">01-Mar-2020</p>
                 </div>
@@ -47,19 +42,19 @@
             <div class="city-weather">
                 <div class="temp-celcius">
                     <p>Temp &deg;C</p>
-                    <p class="thick">25 &deg;C</p>
+                    <p class="thick" id="temp-c">25 &deg;C</p>
                 </div>
                 <div class="humidity-value">
                     <p>Humidity</p>
-                    <p class="thick">25 %</p>
+                    <p class="thick" id="city-humidity">25 %</p>
                 </div>
                 <div class="temp-fahrenheit">
                     <p>Temp F</p>
-                    <p class="thick">78 F</p>
+                    <p class="thick" id="temp-f">78 F</p>
                 </div>
                 <div class="precipitation">
                     <p>Precipitation</p>
-                    <p class="thick">0 %</p>
+                    <p class="thick" id="city-precipitation">0 %</p>
                 </div>
             </div>
             <!-- weather condition for 4 hours -->
@@ -67,8 +62,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">Now</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/windyIcon.svg" >
-                    <p>7</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/windyIcon.svg" >
+                    <p class="next-temp">7</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -76,8 +71,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">11AM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p>6</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
+                    <p class="next-temp">6</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -85,8 +80,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">12PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/sunnyIcon.svg" >
-                    <p>8</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                    <p class="next-temp">8</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -94,8 +89,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">1PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p>6</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
+                    <p class="next-temp">6</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -103,8 +98,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">2PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/rainyIcon.svg" >
-                    <p>7</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/rainyIcon.svg" >
+                    <p class="next-temp">7</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -112,8 +107,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">3PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/humidityIcon.svg" >
-                    <p>4</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/humidityIcon.svg" >
+                    <p class="next-temp">4</p>
                 </div>
             </div>
         </section>
@@ -129,16 +124,16 @@
                         <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="snow"  />    
+                        <input type="radio" name="preference" value="snowflake"  />    
                         <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="rainy"  />    
+                        <input type="radio" name="preference" value="rainy"  checked/>    
                         <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg" >
                     </label>
                     <label class="city-count-selection">
                         Display Top: 
-                        <input type="number" id="city-count" min="3" max="10">
+                        <input type="number" id="city-count" min="3" max="10" value='10'>
                     </label>
                 </span>
             </div>
@@ -150,173 +145,173 @@
                 <div class="city-card-scroll">
                     <div class="card-list">
                         <!-- list of cities -->
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="city-detail-card">
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold">10.00 AM</p>
-                                <p class="bold">2-MAR-2020</p>
+                                <p class="bold city-time">10.00 AM</p>
+                                <p class="bold city-date">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
                                 </div>
                             </div>
                         </div>
@@ -532,7 +527,6 @@
             </div>
         </section>
         <footer>
-
         </footer>
     </body>
 </html>
