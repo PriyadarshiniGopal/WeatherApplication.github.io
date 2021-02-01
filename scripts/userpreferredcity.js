@@ -44,12 +44,12 @@ getData().then(function (data) {
 
     //function to scroll left city list
     function scrollLeft() {
-        cityList.scrollLeft -= 1000;
+        this.scrollLeft -= 1000;
     }
 
     //function to scroll right city list
     function scrollRight() {
-        cityList.scrollLeft += 1000;
+        this.scrollLeft += 1000;
     }
 
     //clear previously setInterval values
@@ -66,10 +66,10 @@ getData().then(function (data) {
         temperature[index].innerHTML = this.temperature;
         let timezone = this.timeZone;
         time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
-        (function (index) {             //to dynamically change time for city
+        setTimeout((function (index) {             //to dynamically change time for city
             interval[index] = setInterval(() =>
                 time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
-        })(index);
+        })(index), 0);
         date[index].innerHTML = dateTime(timezone, 'date');
         humidity[index].innerHTML = this.humidity;
         precipitation[index].innerHTML = this.precipitation;
@@ -150,6 +150,8 @@ getData().then(function (data) {
     }
     cityCount.addEventListener('change', changeCardList);
     cityCount.addEventListener('input', changeCardList);
-    arrowIcon[0].addEventListener('click', scrollLeft);
-    arrowIcon[1].addEventListener('click', scrollRight);
+    let scrolleventleft = scrollLeft.bind(cityList);
+    let scrolleventright = scrollRight.bind(cityList);
+    arrowIcon[0].addEventListener('click', scrolleventleft);
+    arrowIcon[1].addEventListener('click', scrolleventright);
 });
