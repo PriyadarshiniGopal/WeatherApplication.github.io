@@ -9,6 +9,13 @@ getData().then(function (data) {
     let preferenceIcons = document.getElementsByName('preference'); //preference icon sunny,rainy,snow
     let cityCount = document.getElementById("city-count");     //display top input value
     let currentCityCount = 10;                   //to fetch currenty displaying cities count
+    let cityName = document.querySelectorAll(".bold.city-name");  // city Name of card
+    let preferenceIcon = document.querySelectorAll(".preference-icon"); //preference icon sunny,snow and rany
+    let temperature = document.querySelectorAll(".bold.temperature");   //temperature of the city
+    let time = document.querySelectorAll(".bold.city-time");    //current time of city
+    let date = document.querySelectorAll(".bold.city-date");    //date of city
+    let humidity = document.querySelectorAll(".city-humidity-value");   //humidity value of city
+    let precipitation = document.querySelectorAll(".precipitation-value");  //precipitation value for the city
 
     //to disable arrows
     function arrow(cityCardCount) {
@@ -50,17 +57,26 @@ getData().then(function (data) {
         for (let index = 0; index < interval.length; index++)
             clearInterval(interval[index]);
     }
-
+    //assign all values to city cards
+    function assignValues(index, option) {
+        card[index].style.display = "initial";  //to make selected city cards to visible
+        card[index].style.backgroundImage = "url(../assets/icons/Cities/" + this.cityName.toLowerCase() + ".svg)";    //set values from json data
+        cityName[index].innerHTML = this.cityName;
+        preferenceIcon[index].src = "./assets/icons/weather/" + option + "Icon.svg"
+        temperature[index].innerHTML = this.temperature;
+        let timezone = this.timeZone;
+        time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
+        (function (index) {             //to dynamically change time for city
+            interval[index] = setInterval(() =>
+                time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
+        })(index);
+        date[index].innerHTML = dateTime(timezone, 'date');
+        humidity[index].innerHTML = this.humidity;
+        precipitation[index].innerHTML = this.precipitation;
+    }
     //update details of each  cityCards in scroll
     function updateCityCard(resultCity, option) {
         clearsetInterval.call();
-        let cityName = document.querySelectorAll(".bold.city-name");  // city Name of card
-        let preferenceIcon = document.querySelectorAll(".preference-icon"); //preference icon sunny,snow and rany
-        let temperature = document.querySelectorAll(".bold.temperature");   //temperature of the city
-        let time = document.querySelectorAll(".bold.city-time");    //current time of city
-        let date = document.querySelectorAll(".bold.city-date");    //date of city
-        let humidity = document.querySelectorAll(".city-humidity-value");   //humidity value of city
-        let precipitation = document.querySelectorAll(".precipitation-value");  //precipitation value for the city
         arrowIcon[0].style.display = 'initial';
         arrowIcon[1].style.display = 'initial';
         let index = 0;
@@ -70,20 +86,7 @@ getData().then(function (data) {
         for (let items in resultCity) {
             if (index >= 10)
                 break;
-            card[index].style.display = "initial";  //to make selected city cards to visible
-            card[index].style.backgroundImage = "url(../assets/icons/Cities/" + items + ".svg)";    //set values from json data
-            cityName[index].innerHTML = resultCity[items]['cityName'];
-            preferenceIcon[index].src = "./assets/icons/weather/" + option + "Icon.svg"
-            temperature[index].innerHTML = resultCity[items]['temperature'];
-            let timezone = resultCity[items]['timeZone'];
-            time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
-            (function (index) {             //to dynamically change time for city
-                interval[index] = setInterval(() =>
-                    time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
-            })(index);
-            date[index].innerHTML = dateTime(timezone, 'date');
-            humidity[index].innerHTML = resultCity[items]['humidity'];
-            precipitation[index].innerHTML = resultCity[items]['precipitation'];
+            assignValues.apply(resultCity[items], [index, option]);
             index++;
         }
         currentCityCount = index;
