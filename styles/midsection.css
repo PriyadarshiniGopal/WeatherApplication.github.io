@@ -200,3 +200,8 @@
 .medium {
   font-family: Roboto-medium;
 }
+
+.temperature-detail img,
+.temperature-detail span {
+  vertical-align: middle;
+}
