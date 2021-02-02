@@ -30,13 +30,8 @@
   position: sticky;
 }
 
-.preference,
-.temperature-detail {
+.preference {
   margin: 0 auto;
-}
-
-.temperature-detail {
-  margin-left: 20%;
 }
 
 .city-count-selection {
@@ -44,18 +39,18 @@
   padding-top: 0.3rem;
 }
 
-.radio-icon [type="radio"] {
+.preference-selection-icon [type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.radio-icon [type="radio"] + img {
+.preference-selection-icon [type="radio"] + img {
   cursor: pointer;
 }
 
-.radio-icon [type="radio"]:checked + img {
+.preference-selection-icon [type="radio"]:checked + img {
   border-bottom: 2px solid var(--bg-selection-blue);
 }
 
@@ -88,6 +83,7 @@
 .city-card-scroll {
   margin: 0 1rem;
   overflow-x: scroll;
+  scroll-behavior: smooth;
 }
 
 .card-list {
@@ -102,9 +98,9 @@
   white-space: nowrap;
 }
 
-.card-list > div {
+.city-detail-card {
   background-color: rgb(32, 32, 32);
-  background-image: url("../assets/icons/Cities/newyork.svg");
+  background-image: url("../assets/icons/Cities/nome.svg");
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 60% 60%;
@@ -115,16 +111,21 @@
   line-height: 2rem;
   margin: 1rem 2rem;
   padding: 1rem;
-  width: 13.5rem;
+  width: 15rem;
 }
 
-.card-list > div:hover {
-  animation: background-color 4s;
+.city-detail-card:hover {
+  animation: background-color 3s forwards;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
   transform: scale(1.1);
   z-index: 2;
+}
+
+.city-detail-card:hover * {
+  color: black;
+  font-weight: bold;
 }
 
 @keyframes background-color {
@@ -173,7 +174,9 @@
 }
 
 .city-name {
+  display: inline-block;
   font-size: 1.3rem;
+  width: 60%;
 }
 
 .temperature {
