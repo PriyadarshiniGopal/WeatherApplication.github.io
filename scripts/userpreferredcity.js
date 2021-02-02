@@ -60,7 +60,7 @@ getData().then(function (data) {
     //assign all values to city cards
     function assignValues(index, option) {
         card[index].style.display = "initial";  //to make selected city cards to visible
-        card[index].style.backgroundImage = "url(../assets/icons/Cities/" + this.cityName.toLowerCase() + ".svg)";    //set values from json data
+        card[index].style.backgroundImage = "url(../assets/icons/Cities/" + this.cityName + ".svg)";    //set values from json data
         cityName[index].innerHTML = this.cityName;
         preferenceIcon[index].src = "./assets/icons/weather/" + option + "Icon.svg"
         temperature[index].innerHTML = this.temperature;
