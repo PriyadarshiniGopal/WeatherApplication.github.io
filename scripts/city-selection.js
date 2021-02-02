@@ -1,4 +1,4 @@
-import { celciustofahrenheit, dateTime, getData } from "./utility.js";
+import { celciusToFahrenheit, dateTime, getData } from "./utility.js";
 let repeat;
 
 //retrieve json data
@@ -110,7 +110,7 @@ getData().then(function (data) {
         cityName = cityName.toLowerCase();
         document.getElementById("temp-c").innerHTML = (data[cityName]['temperature']);
         document.getElementById("selected-city-icon").src = (`./assets/icons/Cities/${cityName}.svg`);
-        document.getElementById("temp-f").innerHTML = celciustofahrenheit(data[cityName]['temperature']);
+        document.getElementById("temp-f").innerHTML = celciusToFahrenheit(data[cityName]['temperature']);
         document.getElementById("city-humidity").innerHTML = data[cityName]['humidity'];
         document.getElementById("city-precipitation").innerHTML = data[cityName]['precipitation'];
         if (repeat) {
