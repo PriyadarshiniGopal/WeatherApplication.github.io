@@ -1,10 +1,19 @@
-//fetch json data
+// fetch json data
 export const getData = () => fetch('./data/data.json')
     .then(function (response) {
         return response.json();
     })
-//current date
-export function dateTime(timezone, option) {
+
+// convert temperature from celcius to fahrenheit
+export const celciusToFahrenheit = (temperature) => {
+    temperature = temperature.substring(0, temperature.length - 2);
+    temperature = Number(temperature);
+    let f = Math.round(temperature * 9 / 5 + 32) + " F";
+    return f;
+}
+
+// current date
+export const dateTime = (timezone, option) => {
     let options = {
         timeZone: `${timezone}`,
         year: 'numeric',

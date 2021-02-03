@@ -18,9 +18,9 @@
                     <img alt="city-icon" id="selected-city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
                 </div>
                 <!-- City Selection Input -->
-                <form class="selected-city" id="city-name-form">
+                <form class="selected-city" id="city-name-form" onsubmit="return false">
                     <span id="error-msg"></span>
-                    <input list="city-list" id="city" >
+                    <input list="city-list" id="city" value="Maseru">
                     <datalist id="city-list">
                     </datalist>
                     <span class="tooltiptext">City selction</span>
@@ -42,7 +42,7 @@
             <div class="city-weather">
                 <div class="temp-celcius">
                     <p>Temp &deg;C</p>
-                    <p class="thick" id="temp-c">25 &deg;C</p>
+                    <p class="thick" id="celcius">25 &deg;C</p>
                 </div>
                 <div class="humidity-value">
                     <p>Humidity</p>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="temp-fahrenheit">
                     <p>Temp F</p>
-                    <p class="thick" id="temp-f">78 F</p>
+                    <p class="thick" id="fahrenheit">78 F</p>
                 </div>
                 <div class="precipitation">
                     <p>Precipitation</p>
@@ -124,16 +124,16 @@
                         <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="snowflake"  />    
+                        <input type="radio" name="preference" value="snow"  />    
                         <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="rainy"  checked/>    
+                        <input type="radio" name="preference" value="rainy"  />    
                         <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg" >
                     </label>
                     <label class="city-count-selection">
                         Display Top: 
-                        <input type="number" id="city-count" min="3" max="10" value='10'>
+                        <input type="number" id="city-count" min="3" max="10">
                     </label>
                 </span>
             </div>
