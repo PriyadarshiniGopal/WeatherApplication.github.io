@@ -3,29 +3,24 @@ let interval = [];
 
 //retrieve json data
 getData().then(function (data) {
-    let card = document.querySelectorAll(".city-detail-card");   //list of all cards
-    let arrowIcon = document.querySelectorAll(".center");        //scroll arrows
-    let cityList = document.querySelector(".city-card-scroll"); // scroll bar contains city cards
+    let arrowIcon = document.querySelectorAll(".center");           //scroll arrows
+    let cityList = document.querySelector(".city-card-scroll");     // scroll bar contains city cards
     let preferenceIcons = document.getElementsByName('preference'); //preference icon sunny,rainy,snow
-    let cityCount = document.getElementById("city-count");     //display top input value
-    let currentCityCount = 10;                   //to fetch currenty displaying cities count
-    let cityName = document.querySelectorAll(".bold.city-name");  // city Name of card
-    let preferenceIcon = document.querySelectorAll(".preference-icon"); //preference icon sunny,snow and rany
-    let temperature = document.querySelectorAll(".bold.temperature");   //temperature of the city
-    let time = document.querySelectorAll(".bold.city-time");    //current time of city
-    let date = document.querySelectorAll(".bold.city-date");    //date of city
-    let humidity = document.querySelectorAll(".city-humidity-value");   //humidity value of city
-    let precipitation = document.querySelectorAll(".precipitation-value");  //precipitation value for the city
+    let cityCount = document.getElementById("city-count");          //display top input value
+    let currentCityCount = 10;                                      //to fetch currenty displaying cities count
+
+    //restrict manual entry
+    function restrictEntry(e) { e.preventDefault(); };
 
     //to disable arrows
-    function arrow(cityCardCount) {
-        if (cityCardCount <= 4) {
-            arrowIcon[0].style.display = 'none';
-            arrowIcon[1].style.display = 'none';
-        }
-        else if (currentCityCount > 4) {
+    function arrow() {
+        if (cityList.scrollWidth > cityList.clientWidth) {
             arrowIcon[0].style.display = 'initial';
             arrowIcon[1].style.display = 'initial';
+        }
+        else {
+            arrowIcon[0].style.display = 'none';
+            arrowIcon[1].style.display = 'none';
         }
     }
 
@@ -34,6 +29,11 @@ getData().then(function (data) {
         if (e.target.value < 3) {
             e.target.value = 3;
         }
+
+        if (e.target.value > currentCityCount) {
+            e.target.value = currentCityCount;
+        }
+        let card = document.querySelectorAll(".city-detail-card");       //list of all cards
         for (let count = 0; count < e.target.value && count < currentCityCount; count++)
             card[count].style.display = 'initial';
 
@@ -44,12 +44,12 @@ getData().then(function (data) {
 
     //function to scroll left city list
     function scrollLeft() {
-        this.scrollLeft -= 1000;
+        this.scrollLeft -= cityList.clientWidth;
     }
 
     //function to scroll right city list
     function scrollRight() {
-        this.scrollLeft += 1000;
+        this.scrollLeft += cityList.clientWidth;
     }
 
     //clear previously setInterval values
@@ -57,41 +57,49 @@ getData().then(function (data) {
         for (let index = 0; index < interval.length; index++)
             clearInterval(interval[index]);
     }
+
     //assign all values to city cards
-    function assignValues(index, option) {
-        card[index].style.display = "initial";  //to make selected city cards to visible
-        card[index].style.backgroundImage = "url(https://priyadarshinigopal.github.io/WeatherApplication.github.io/assets/icons/Cities/" + this.cityName.toLowerCase() + ".svg)";    //set values from json data
-        cityName[index].innerHTML = this.cityName;
-        preferenceIcon[index].src = "./assets/icons/weather/" + option + "Icon.svg"
-        temperature[index].innerHTML = this.temperature;
+    function assignValues(cityItems, option) {
+        let str = '<div class="city-detail-card" style="background-image:url(../assets/icons/Cities/' + this.cityName.toLowerCase() + '.svg)">';
+        str += '<span class="bold city-name">' + this.cityName + '</span>';
+        str += '<span class="temperature-detail">';
+        str += '<img alt="temperature" class="preference-icon" src="./assets/icons/weather/' + option + 'Icon.svg" >';
+        str += '  <span class="bold temperature">' + this.temperature + '</span></span>';
+        str += '<div  class="info" >';
+        str += '<p class="bold city-time">';
         let timezone = this.timeZone;
-        time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
-        setTimeout((function (index) {             //to dynamically change time for city
-            interval[index] = setInterval(() =>
-                time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
-        })(index), 0);
-        date[index].innerHTML = dateTime(timezone, 'date');
-        humidity[index].innerHTML = this.humidity;
-        precipitation[index].innerHTML = this.precipitation;
+        let time = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
+        str += time;
+        str += '</p > ';
+        str += '<p class="bold city-date">' + dateTime(timezone, 'date') + '</p>';
+        str += '<div class="humidity-image">';
+        str += '<img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">' + this.humidity + '</span>';
+        str += '</div><div class="precipitation-image">';
+        str += '<img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> ' + this.precipitation + '</span>';
+        str += '</div></div></div > ';
+        document.querySelector('.card-list').innerHTML += str;
+        interval[cityItems] = setInterval(() =>
+            document.querySelectorAll(".bold.city-time")[cityItems].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
     }
+
     //update details of each  cityCards in scroll
     function updateCityCard(resultCity, option) {
         clearsetInterval.call();
+        document.querySelector('.card-list').innerHTML = '';
         arrowIcon[0].style.display = 'initial';
         arrowIcon[1].style.display = 'initial';
-        let index = 0;
-        for (let cityCard of card) {    //toset display none to all city cards
-            cityCard.style.display = "none";
-        }
+        let cityItems = 0;
         for (let items in resultCity) {
-            if (index >= 10)
+            if (cityItems >= 10)
                 break;
-            assignValues.apply(resultCity[items], [index, option]);
-            index++;
+            assignValues.apply(resultCity[items], [cityItems, option]);
+            cityItems++;
         }
-        currentCityCount = index;
-        cityCount.value = index;    //to set value for display top input box
-        arrow(index);           //call arrow function to disappear or visible arrrow
+        if (cityItems < 4)      //disable the spinner
+            cityCount.disabled = 'disabled';
+        currentCityCount = cityItems;
+        cityCount.value = cityItems;    //to set value for display top input box
+        arrow(cityItems);           //call arrow function to disappear or visible arrrow
     }
 
     //sort city based 
@@ -99,15 +107,15 @@ getData().then(function (data) {
         let resultCity = {};
         resultCity = Object.keys(data)
             .filter(function (key) {        //filter cities based on user preference
-                let temp = Number(data[key].temperature.slice(0, -2));
+                let temperature = Number(data[key].temperature.slice(0, -2));
                 let humidity = Number(data[key].humidity.slice(0, -1));
                 let precipitation = Number(data[key].precipitation.slice(0, -1));
-                if (e.target.value === 'sunny' && temp >= 29 && humidity < 50 && precipitation >= 50) {
+                if (e.target.value === 'sunny' && temperature >= 29 && humidity < 50 && precipitation >= 50) {
                     return key;
                 }
-                else if (e.target.value === 'snowflake' && temp > 20 && humidity > 50 && precipitation < 50)
+                else if (e.target.value === 'snowflake' && temperature > 20 && humidity > 50 && precipitation < 50)
                     return key;
-                else if (e.target.value === 'rainy' && temp < 20 && humidity >= 50)
+                else if (e.target.value === 'rainy' && temperature < 20 && humidity >= 50)
                     return key;
             }
             )
@@ -118,16 +126,16 @@ getData().then(function (data) {
 
         //sort obtained cities based on property values(temperature ,precipitation,humidity) most to least
         const sortKeys = (obj, option) => {
-            return Object.assign(...Object.entries(obj).sort((a, b) => {
-                let t1 = a[1][option];
-                let t2 = b[1][option];
-                t1 = Number(t1.slice(0, -1));
-                t2 = Number(t2.slice(0, -1));
+            return Object.assign(...Object.entries(obj).sort((object1, object2) => {
+                let optionValue1 = object1[1][option];
+                let optionValue2 = object2[1][option];
+                optionValue1 = Number(optionValue1.slice(0, -1));
+                optionValue2 = Number(optionValue2.slice(0, -1));
                 if (option == 'temperature') {
-                    t1 = Number(t1 + ''.slice(0, -1));
-                    t2 = Number(t2 + ''.slice(0, -1));
+                    optionValue1 = Number(optionValue1 + ''.slice(0, -1));
+                    optionValue2 = Number(optionValue2 + ''.slice(0, -1));
                 }
-                return t1 < t2 ? 1 : -1;
+                return optionValue1 < optionValue2 ? 1 : -1;
             }).map(([key, value]) => {
                 return {
                     [key]: value
@@ -143,6 +151,7 @@ getData().then(function (data) {
             Object.keys(sortKeys(resultCity, 'humidity'));
         updateCityCard(resultCity, e.target.value);
     }
+
     //adding event Listener to elements
     for (let icons of preferenceIcons) {
         icons.addEventListener('change', sortCities);
@@ -154,4 +163,5 @@ getData().then(function (data) {
     let scrolleventright = scrollRight.bind(cityList);
     arrowIcon[0].addEventListener('click', scrolleventleft);
     arrowIcon[1].addEventListener('click', scrolleventright);
+    cityCount.addEventListener('keypress', restrictEntry);
 });
