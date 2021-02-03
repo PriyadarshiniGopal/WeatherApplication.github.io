@@ -15,21 +15,15 @@
             <div class="city-selection">
                 <!-- City Icon -->
                 <div class="city-icon">
-                    <img alt="city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
+                    <img alt="city-icon" id="selected-city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
                 </div>
                 <!-- City Selection Input -->
                 <form class="selected-city" id="city-name-form" onsubmit="return false">
                     <span id="error-msg"></span>
                     <input list="city-list" id="city" value="Maseru">
                     <datalist id="city-list">
-                        <option value="Nome">Nome</option>
-                        <option value="NewDelhi">NewDelhi</option>
-                        <option value="Newyork">Newyork</option>
-                        <option value="Jamaica">Jamaica</option>
-                        <option value="Losangeles">Losangeles</option>
-                        <option value="Winnipeg">Winnipeg</option>
-                        <option value="Juba">Juba</option>
                     </datalist>
+                    <span class="tooltiptext">City selction</span>
                 </form>
                 <div class="empty-element">
 
@@ -39,7 +33,7 @@
                     <div class="current-time">
                         <span class="time">10 : 10</span>
                         <span class="sec"> : 44</span>
-                        <img alt="AM" src="./assets/icons/general/amState.svg">
+                        <img alt="AM" id="period" src="./assets/icons/general/amState.svg">
                     </div>
                     <p class="date">01-Mar-2020</p>
                 </div>
@@ -52,7 +46,7 @@
                 </div>
                 <div class="humidity-value">
                     <p>Humidity</p>
-                    <p class="thick">25 %</p>
+                    <p class="thick" id="city-humidity">25 %</p>
                 </div>
                 <div class="temp-fahrenheit">
                     <p>Temp F</p>
@@ -60,7 +54,7 @@
                 </div>
                 <div class="precipitation">
                     <p>Precipitation</p>
-                    <p class="thick">0 %</p>
+                    <p class="thick" id="city-precipitation">0 %</p>
                 </div>
             </div>
             <!-- weather condition for 4 hours -->
@@ -68,8 +62,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">Now</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/windyIcon.svg" >
-                    <p>7</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/windyIcon.svg" >
+                    <p class="next-temp">7</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -77,8 +71,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">11AM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p>6</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
+                    <p class="next-temp">6</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -86,8 +80,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">12PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/sunnyIcon.svg" >
-                    <p>8</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                    <p class="next-temp">8</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -95,8 +89,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">1PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p>6</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
+                    <p class="next-temp">6</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -104,8 +98,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">2PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/rainyIcon.svg" >
-                    <p>7</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/rainyIcon.svg" >
+                    <p class="next-temp">7</p>
                 </div>
                 <div class="vertical-line weather-forecast-time">
                     |
@@ -113,8 +107,8 @@
                 <div class="weather-forecast-time">
                     <div class="forecast-time">3PM</div>
                     <p>|</p>
-                    <img alt="weather-icons" src="./assets/icons/weather/humidityIcon.svg" >
-                    <p>4</p>
+                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/humidityIcon.svg" >
+                    <p class="next-temp">4</p>
                 </div>
             </div>
         </section>
@@ -130,16 +124,16 @@
                         <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="snowflake"  />    
+                        <input type="radio" name="preference" value="snow"  />    
                         <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg" >
                     </label>
                     <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="rainy"  checked/>    
+                        <input type="radio" name="preference" value="rainy"  />    
                         <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg" >
                     </label>
                     <label class="city-count-selection">
                         Display Top: 
-                        <input type="number" id="city-count" min="3" max="10" value='10'>
+                        <input type="number" id="city-count" min="3" max="10">
                     </label>
                 </span>
             </div>
@@ -151,173 +145,173 @@
                 <div class="city-card-scroll">
                     <div class="card-list">
                         <!-- list of cities -->
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
-                        <div class="city-detail-card">
+                        <div>
                             <span class="bold city-name">Newyork</span>
                             <span class="temperature-detail">
-                                <img alt="temperature" class="preference-icon" src="./assets/icons/weather/sunnyIcon.svg" >
+                                <img alt="temperature" src="./assets/icons/weather/sunnyIcon.svg" >
                                 <span class="bold temperature">25 &deg;C</span>
                             </span>
                             <div  class="info" >
-                                <p class="bold city-time">10.00 AM</p>
-                                <p class="bold city-date">2-MAR-2020</p>
+                                <p class="bold">10.00 AM</p>
+                                <p class="bold">2-MAR-2020</p>
                                 <div class="humidity-image">
-                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> <span class="city-humidity-value">10%</span>
+                                    <img alt="humidity" class="image-margin-right" src="./assets/icons/weather/humidityIcon.svg"> 10%
                                 </div>
                                 <div class="precipitation-image">
-                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> <span class="precipitation-value"> 53%</span>
+                                    <img alt="Precipitation" class="image-margin-right" src="./assets/icons/weather/precipitationIcon.svg"> 53%
                                 </div>
                             </div>
                         </div>
@@ -337,13 +331,13 @@
                     <span class="continent-sorting">
                         <span>Continent Name</span>
                         <span>
-                            <img alt="downarrow" name="sort-icon" value="continent" src="./assets/icons/general/arrowDown.svg" title='ascending order'>
+                            <img alt="downarrow" src="./assets/icons/general/arrowDown.svg">
                         </span>
                     </span>
                     <span class="temperature-sorting">
                         <span>Temperature</span>
-                        <span>  
-                            <img alt="uparrow" name="sort-icon" value="temperature"  src="./assets/icons/general/arrowUp.svg" title='descending order'>
+                        <span>
+                            <img alt="uparrow" src="./assets/icons/general/arrowUp.svg">
                         </span>
                     </span>
                 </span>
@@ -354,14 +348,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name">Delhi,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p>Delhi,</p>
+                            <p>10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -369,14 +363,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Africa</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Egypt,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Egypt,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -384,14 +378,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Europe</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> London,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> London,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -399,14 +393,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium" >Asia</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name">Delhi,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p>Delhi,</p>
+                            <p>10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity" src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -414,14 +408,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium" >Africa</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Egypt,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Egypt,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -429,14 +423,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Europe</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> London,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> London,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -444,14 +438,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name">Delhi,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p>Delhi,</p>
+                            <p>10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -459,14 +453,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Africa</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Egypt,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Egypt,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -474,14 +468,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">South America</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Brazil,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Brazil,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -489,14 +483,14 @@
                     <div class="continent-city-name">
                         <p  class="continent-name medium">Asia</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name">Delhi,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p>Delhi,</p>
+                            <p>10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -504,14 +498,14 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium" >Africa</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Egypt,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Egypt,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">37 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
@@ -519,21 +513,20 @@
                     <div class="continent-city-name">
                         <p class="continent-name medium">South America</p>
                         <div class="current-city-time">
-                            <p name="continent-city-name"> Brazil,</p>
-                            <p name="continent-city-time">10:10 AM</p>
+                            <p> Brazil,</p>
+                            <p> 10:10 AM</p>
                         </div>
                     </div>
                     <div>
                         <p class="bold continent-city-temperature">25 &deg;C</p>
                         <div class="humidity">
-                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> <span name="continent-city-humidity">53%</span>
+                            <img alt="humidity"  src="./assets/icons/weather/humidityIcon.svg"> 53%
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <footer>
-
         </footer>
     </body>
 </html>
