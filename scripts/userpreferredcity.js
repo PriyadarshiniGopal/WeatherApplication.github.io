@@ -97,6 +97,8 @@ getData().then(function (data) {
         }
         if (cityItems < 4)      //disable the spinner
             cityCount.disabled = 'disabled';
+        else
+            cityCount.disabled = '';
         currentCityCount = cityItems;
         cityCount.value = cityItems;    //to set value for display top input box
         arrow(cityItems);           //call arrow function to disappear or visible arrrow
