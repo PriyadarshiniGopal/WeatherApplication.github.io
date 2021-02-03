@@ -6,7 +6,7 @@ getData().then(function (data) {
 
     let sortIcon = document.getElementsByName('sort-icon');  //fetch sorting icons
     let cityList = JSON.parse(JSON.stringify(data));
-
+    let continentCityCards = document.querySelector('.continent-city-list');
     //clear previously setInterval values
     function clearsetInterval() {
         for (let index = 0; index < interval.length; index++)
@@ -15,19 +15,36 @@ getData().then(function (data) {
 
     //sort cities based on continent or temperature
     function sortCity(e) {
-        let continentName = document.querySelectorAll('.continent-name.medium'); //continent Name
-        let cityName = document.getElementsByName('continent-city-name');         //City name 
-        let time = document.getElementsByName('continent-city-time');              //city time
-        let temperature = document.querySelectorAll('.bold.continent-city-temperature'); //temperature of city
-        let humidity = document.getElementsByName('continent-city-humidity');             //humidity of city
-        let sortImage = document.getElementsByName('sort-icon');        //sorting icon 
-        let indexOfImage = [].indexOf.call(sortIcon, e.target);       //image of clicked icon
-        let sortingArrow = sortImage[indexOfImage].alt;               //icon to find ascending or descending order
+
+        //change each continent city cards
+        function updateContinentCity(index) {
+            let timezone = this.timeZone;
+            let continent = timezone.split('/');
+            let content = '';
+            content += '<div class="continent-city">';
+            content += '<div class="continent-city-name">';
+            content += '<p class="continent-name medium">' + continent[0] + '</p>';
+            content += '<div class="current-city-time">';
+            content += '<p name="continent-city-name">' + this.cityName + '</p>';
+            content += '<p name="continent-city-time">' + ', ' + dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(); +'</p>';
+            content += '</div ></div ><div>';
+            content += '<p class="bold continent-city-temperature">' + this.temperature + '</p>';
+            content += '<div class="humidity">';
+            content += '<img alt="humidity" src="./assets/icons/weather/humidityIcon.svg">';
+            content += '<span name="continent-city-humidity">' + this.humidity + '</span>';
+            content += ' </div></div></div>';
+            continentCityCards.innerHTML += content;
+            interval[index] = setInterval(() => {
+                let time = ', ' + dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
+                document.getElementsByName('continent-city-time')[index].innerHTML = time;
+            }, 10000)
+        }
+
         const sortByContinent = (obj, option, order) => {
-            return Object.assign(...Object.entries(obj).sort((a, b) => {
+            return Object.assign(...Object.entries(obj).sort((object1, object2) => {
                 let timeZone1 = [], timeZone2 = [];
-                timeZone1 = (a[1]['timeZone']).split('/');
-                timeZone2 = b[1]['timeZone'].split('/');
+                timeZone1 = (object1[1]['timeZone']).split('/');
+                timeZone2 = object2[1]['timeZone'].split('/');
                 if (option === 'continent') {
                     if (order === 'downarrow')
                         return timeZone1[0] < timeZone2[0] ? -1 : 1;
@@ -35,14 +52,14 @@ getData().then(function (data) {
                         return timeZone1[0] > timeZone2[0] ? -1 : 1;
                 }
                 else if (option === 'temperature' && timeZone1[0] === timeZone2[0]) {
-                    let t1 = a[1]['temperature'];
-                    let t2 = b[1]['temperature'];
-                    t1 = Number(t1.slice(0, -2));
-                    t2 = Number(t2.slice(0, -2));
+                    let temperature1 = object1[1]['temperature'];
+                    let temperature2 = object2[1]['temperature'];
+                    temperature1 = Number(temperature1.slice(0, -2));
+                    temperature2 = Number(temperature2.slice(0, -2));
                     if (order === 'downarrow')
-                        return t1 > t2 ? 1 : -1;
+                        return temperature1 > temperature2 ? 1 : -1;
                     else
-                        return t1 < t2 ? 1 : -1;
+                        return temperature1 < temperature2 ? 1 : -1;
                 }
                 else
                     return null;
@@ -66,25 +83,16 @@ getData().then(function (data) {
         }
         clearsetInterval();
         let index = 0;
+        continentCityCards.innerHTML = '';
         for (let items in cityList) {
             if (index > 11)
                 break;
-            let timezone = cityList[items]['timeZone'];
-            let continent = timezone.split('/');
-            continentName[index].innerHTML = continent[0];
-            cityName[index].innerHTML = cityList[items]['cityName'] + ',';
-            time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase();
-            (function (index) {             //to dynamically change time for city
-                interval[index] = setInterval(() =>
-                    time[index].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
-            })(index);
-            temperature[index].innerHTML = cityList[items]['temperature'];
-            humidity[index].innerHTML = cityList[items]['humidity'];
+            updateContinentCity.apply(cityList[items], [index]);
             index++;
         }
     }
     for (let icon of sortIcon) {
-        icon.addEventListener('click', sortCity);      //add event listener of icons
+        icon.addEventListener('click', sortCity);
         icon.dispatchEvent(new Event('click'));
     }
 });
