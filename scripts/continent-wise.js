@@ -46,7 +46,7 @@ getData().then(function (data) {
                 timeZone1 = (object1[1]['timeZone']).split('/');
                 timeZone2 = object2[1]['timeZone'].split('/');
                 if (option === 'continent') {
-                    if (order === 'downarrow')
+                    if (order === 'uparrow')
                         return timeZone1[0] < timeZone2[0] ? -1 : 1;
                     else
                         return timeZone1[0] > timeZone2[0] ? -1 : 1;
@@ -56,7 +56,7 @@ getData().then(function (data) {
                     let temperature2 = object2[1]['temperature'];
                     temperature1 = Number(temperature1.slice(0, -2));
                     temperature2 = Number(temperature2.slice(0, -2));
-                    if (order === 'downarrow')
+                    if (order === 'uparrow')
                         return temperature1 > temperature2 ? 1 : -1;
                     else
                         return temperature1 < temperature2 ? 1 : -1;
@@ -74,12 +74,12 @@ getData().then(function (data) {
         if (e.target.alt === 'downarrow') {
             e.target.alt = 'uparrow';
             e.target.src = './assets/icons/general/arrowUp.svg';
-            e.target.setAttribute('title', 'descending order');
+            e.target.setAttribute('title', 'toggle for ascending order');
         }
         else {
             e.target.alt = 'downarrow';
             e.target.src = './assets/icons/general/arrowDown.svg';
-            e.target.setAttribute('title', 'ascending order');
+            e.target.setAttribute('title', 'toggle for descending order');
         }
         clearsetInterval();
         let index = 0;
