@@ -4,6 +4,7 @@ export const getData = () => fetch('./data/data.json')
         return response.json();
     })
 
+
 // convert temperature from celcius to fahrenheit
 export const celciusToFahrenheit = (temperature) => {
     temperature = temperature.substring(0, temperature.length - 2);

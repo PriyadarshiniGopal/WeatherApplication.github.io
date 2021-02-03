@@ -92,7 +92,7 @@ getData().then(function (data) {
         let hour = (dateTime(timezone, 'hour')) + "" + (dateTime(timezone, 'period')).toUpperCase();
         let time = document.querySelectorAll(".forecast-time");
         let icon = document.querySelectorAll(".next-weather-icon");
-        let temp = document.querySelectorAll(".next-temp");
+        let nexttemperature = document.querySelectorAll(".next-temp");
         for (let child of time) {
             if (child !== time[0]) {
                 hour = nextHour(hour);  // find next hour
@@ -100,12 +100,12 @@ getData().then(function (data) {
             }
         }
         let temperature;
-        for (let index = 0; index < temp.length; index++) { // update temperature for next hours
+        for (let index = 0; index < nexttemperature.length; index++) { // update temperature for next hours
             if (index == 0)
                 temperature = data[cityName]['temperature'];
             else
                 temperature = data[cityName]['nextFiveHrs'][index - 1];
-            temp[index].innerHTML = temperature.slice(0, -2);
+            nexttemperature[index].innerHTML = temperature.slice(0, -2);
             let weather = weatherIcon(temperature); // update icon based on temperature
             icon[index].src = "./assets/icons/weather/" + weather + "Icon.svg";
         }
