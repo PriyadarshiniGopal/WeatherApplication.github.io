@@ -60,7 +60,7 @@ getData().then(function (data) {
 
     //assign all values to city cards
     function assignValues(cityItems, option) {
-        let str = '<div class="city-detail-card" style="background-image:url(WeatherApplication.github.io/assets/icons/Cities/' + this.cityName.toLowerCase() + '.svg)">';
+        let str = '<div class="city-detail-card" style="background-image:url(assets/icons/Cities/' + this.cityName.toLowerCase() + '.svg)">';
         str += '<span class="bold city-name">' + this.cityName + '</span>';
         str += '<span class="temperature-detail">';
         str += '<img alt="temperature" class="preference-icon" src="./assets/icons/weather/' + option + 'Icon.svg" >';
