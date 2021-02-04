@@ -1,22 +1,34 @@
 import { getData, dateTime } from "./utility.js";
 let interval = [];
 
-//retrieve json data
+/**
+ * To retrieve json data
+ * @param {JSON} data
+ */
 getData().then(function (data) {
 
     let sortIcon = document.getElementsByName('sort-icon');  //fetch sorting icons
     let cityList = JSON.parse(JSON.stringify(data));
     let continentCityCards = document.querySelector('.continent-city-list');
-    //clear previously setInterval values
+
+    /**
+     * To clear previously setInterval values    
+     */
     function clearsetInterval() {
         for (let index = 0; index < interval.length; index++)
             clearInterval(interval[index]);
     }
 
-    //sort cities based on continent or temperature
+    /**
+     * To sort cities based on continent or temperature
+     * @param {Event} e 
+     */
     function sortCity(e) {
 
-        //change each continent city cards
+        /**
+         * To change each continent city cards
+         * @param {Number} index 
+         */
         function updateContinentCity(index) {
             let timezone = this.timeZone;
             let continent = timezone.split('/');
@@ -40,6 +52,12 @@ getData().then(function (data) {
             }, 10000)
         }
 
+        /**
+         * To sort cities of continent based on temperature
+         * @param {Object} obj 
+         * @param {String} option 
+         * @param {String} order 
+         */
         const sortByContinent = (obj, option, order) => {
             return Object.assign(...Object.entries(obj).sort((object1, object2) => {
                 let timeZone1 = [], timeZone2 = [];
