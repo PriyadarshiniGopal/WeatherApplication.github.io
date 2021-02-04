@@ -1,17 +1,21 @@
 import { celciusToFahrenheit, dateTime, getData } from "./utility.js";
 let repeat, weatherForecastInterval;
 
-// retrieve json data
+/**
+ * To retrieve json data
+ * @param {JSON} data
+ */
 getData().then(function (data) {
 
-    // values fetched
     let cityinput = document.getElementById("city");
     let form = document.getElementById("city-name-form");
     let cityList = document.getElementById("city-list"); // datalist element
     let previousCityName;
     list();
 
-    // dynamic datalist option
+    /**
+     * To add option dynamically for city selection input
+     */
     function list() {
         let cities = Object.keys(data);
         for (let city of cities) {
@@ -21,15 +25,14 @@ getData().then(function (data) {
         }
     }
 
-    // validate city Name input 
+    /**
+     * To validate city name Input 
+     */
     function inputValidation() {
         let inputText = cityinput.value;
         let icon = document.querySelectorAll(".next-weather-icon");
-        let time = document.querySelectorAll(".forecast-time");
-        let temp = document.querySelectorAll(".next-temp");
         for (let City in data) {
             if (data[City]['cityName'] === inputText) {
-                cityinput.style.border = "none";
                 for (let index = 0; index < icon.length; index++) {
                     document.getElementById("error-msg").innerHTML = "";
                     icon[index].style.visibility = "initial";
@@ -40,27 +43,16 @@ getData().then(function (data) {
             }
         }
 
-        // set all values to NIL if city name is null or wrong
-        cityinput.style.border = "2px solid red";
+        // set all border and input message
+        cityinput.style.border = "4px solid red";
         document.getElementById("error-msg").innerHTML = "Invalid CityName";
-        document.getElementById("selected-city-icon").style.display = "none";
-        document.getElementById("celcius").innerHTML = 'NIL';
-        document.getElementById("fahrenheit").innerHTML = 'NIL';
-        document.getElementById("city-humidity").innerHTML = 'NIL';
-        document.getElementById("city-precipitation").innerHTML = 'NIL';
-        for (let child of time) {
-            if (child !== time[0]) {
-                child.textContent = 'NIL';
-            }
-        }
-        for (let index = 0; index < temp.length; index++) {
-            temp[index].innerHTML = 'NIL';
-            icon[index].style.visibility = "hidden";
-        }
         return false;
     }
 
-    // update current date time and state icon
+    /**
+     * To update current date time and state icon
+     * @param {String} timezone 
+     */
     function clock(timezone) {
         let period = dateTime(timezone, 'period');
         document.querySelector(".date").innerHTML = (dateTime(timezone, 'date'));
@@ -69,7 +61,10 @@ getData().then(function (data) {
         document.getElementById("period").src = "./assets/icons/general/" + period + "State.svg";
     }
 
-    // next 5 hour weather update
+    /**
+     * To update next 5 hour weather
+     * @param {String} hour 
+     */
     function nextHour(hour) {
         let nextHour = hour.slice(0, -2); // get number from hour
         let state = hour.slice(-2); // get state from hour
@@ -80,19 +75,26 @@ getData().then(function (data) {
         return nextHour + state;      // return time with state
     }
 
-    //  find icon for  next fivehours weather
+    /**
+     * To find icon for  next fivehours weather
+     * @param {String} temperature 
+     */
     function weatherIcon(temperature) {
         temperature = temperature.slice(0, -2);
         temperature = Number(temperature);
         return temperature > 29 ? "sunny" : temperature >= 23 ? "cloudy" : temperature >= 18 ? "rainy" : "windy";
     }
 
-    // weather forecast
+    /**
+     * To Update weather forecast 
+     * @param {String} cityName 
+     * @param {String} timezone 
+     */
     function weather(cityName, timezone) {
         let hour = (dateTime(timezone, 'hour')) + "" + (dateTime(timezone, 'period')).toUpperCase();
         let time = document.querySelectorAll(".forecast-time");
         let icon = document.querySelectorAll(".next-weather-icon");
-        let nexttemperature = document.querySelectorAll(".next-temp");
+        let nextTemperature = document.querySelectorAll(".next-temperature");
         for (let child of time) {
             if (child !== time[0]) {
                 hour = nextHour(hour);  // find next hour
@@ -100,20 +102,21 @@ getData().then(function (data) {
             }
         }
         let temperature;
-        for (let index = 0; index < nexttemperature.length; index++) { // update temperature for next hours
+        for (let index = 0; index < nextTemperature.length; index++) { // update temperature for next hours
             if (index == 0)
                 temperature = data[cityName]['temperature'];
             else
                 temperature = data[cityName]['nextFiveHrs'][index - 1];
-            nexttemperature[index].innerHTML = temperature.slice(0, -2);
+            nextTemperature[index].innerHTML = temperature.slice(0, -2);
             let weather = weatherIcon(temperature); // update icon based on temperature
             icon[index].src = "./assets/icons/weather/" + weather + "Icon.svg";
         }
     }
 
-    // event Handler to change topsection 
+    /**
+     * event Handler to change topsection 
+     */
     function topSection() {
-        // fetch all DOM elements
         let cityName = cityinput.value;
         cityName = cityName.toLowerCase();
         if (!inputValidation()) {
@@ -138,7 +141,9 @@ getData().then(function (data) {
         previousCityName = cityinput.value;
     }
 
-    // set previous city name if current city name is invalid
+    /**
+     * set previous city name if current city name is invalid
+     */
     function setPreviousCityName() {
         if (!inputValidation()) {
             cityinput.value = previousCityName;
@@ -146,14 +151,19 @@ getData().then(function (data) {
         }
     }
 
-    // event listener to all elements
-    cityinput.addEventListener('blur', setPreviousCityName);
-    cityinput.addEventListener('click', (e) => {
+    /**
+     * To list all options
+     * @param {Event} e 
+     */
+    function listCity(e) {
         if (e.target.selectionStart !== 0)
             return;
         cityinput.setAttribute('placeholder', previousCityName);
         cityinput.value = '';
-    });
+    }
+
+    cityinput.addEventListener('blur', setPreviousCityName);
+    cityinput.addEventListener('click', listCity);
     cityinput.addEventListener('input', inputValidation);
     form.addEventListener('input', topSection);
     form.dispatchEvent(new Event("input"));
