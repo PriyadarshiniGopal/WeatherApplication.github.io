@@ -149,6 +149,8 @@ getData().then(function (data) {
     // event listener to all elements
     cityinput.addEventListener('blur', setPreviousCityName);
     cityinput.addEventListener('click', (e) => {
+        if (e.target.selectionStart !== 0)
+            return;
         cityinput.setAttribute('placeholder', previousCityName);
         cityinput.value = '';
     });
