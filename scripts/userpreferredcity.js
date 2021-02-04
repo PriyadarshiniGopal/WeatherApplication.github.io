@@ -1,7 +1,10 @@
 import { getData, dateTime } from "./utility.js";
 let interval = [];
 
-//retrieve json data
+/**
+ * To retrive json data
+ * @param {object} data
+*/
 getData().then(function (data) {
     let arrowIcon = document.querySelectorAll(".center");           //scroll arrows
     let cityList = document.querySelector(".city-card-scroll");     // scroll bar contains city cards
@@ -9,22 +12,32 @@ getData().then(function (data) {
     let cityCount = document.getElementById("city-count");          //display top input value
     let currentCityCount = 10;                                      //to fetch currenty displaying cities count
 
-    //restrict manual entry
-    function restrictEntry(e) { e.preventDefault(); };
+    /**
+     * To restrict manual entry for display top input
+     * @param {Event} e
+    */
+    function restrictEntry(e) {
+        e.preventDefault();
+    }
 
-    //to disable arrows
+    /** 
+     * To disable arraw when city cards not overflow
+    */
     function arrow() {
         if (cityList.scrollWidth > cityList.clientWidth) {
-            arrowIcon[0].style.display = 'initial';
-            arrowIcon[1].style.display = 'initial';
+            arrowIcon[0].style.visibility = 'initial';
+            arrowIcon[1].style.visibility = 'initial';
         }
         else {
-            arrowIcon[0].style.display = 'none';
-            arrowIcon[1].style.display = 'none';
+            arrowIcon[0].style.visibility = 'hidden';
+            arrowIcon[1].style.visibility = 'hidden';
         }
     }
 
-    //to change list of city cards based on display top value
+    /**
+     * To update city cards list
+     * @param {Event} e 
+     */
     function changeCardList(e) {
         if (e.target.value < 3) {
             e.target.value = 3;
@@ -42,25 +55,35 @@ getData().then(function (data) {
         arrow(e.target.value);
     }
 
-    //function to scroll left city list
+    /**
+     * To scroll left city list
+     */
     function scrollLeft() {
         this.scrollLeft -= cityList.clientWidth;
     }
 
-    //function to scroll right city list
+    /**
+     * To scroll right city list
+     */
     function scrollRight() {
         this.scrollLeft += cityList.clientWidth;
     }
 
-    //clear previously setInterval values
+    /**
+     * To clear previously setInterval values
+     */
     function clearsetInterval() {
         for (let index = 0; index < interval.length; index++)
             clearInterval(interval[index]);
     }
 
-    //assign all values to city cards
+    /**
+     * To assign all values to city cards
+     * @param {number} cityItems 
+     * @param {string} option 
+     */
     function assignValues(cityItems, option) {
-        let str = '<div class="city-detail-card" style="background-image:url(assets/icons/Cities/' + this.cityName.toLowerCase() + '.svg)">';
+        let str = '<div class="city-detail-card" style="background-image:url(../assets/icons/Cities/' + this.cityName.toLowerCase() + '.svg)">';
         str += '<span class="bold city-name">' + this.cityName + '</span>';
         str += '<span class="temperature-detail">';
         str += '<img alt="temperature" class="preference-icon" src="./assets/icons/weather/' + option + 'Icon.svg" >';
@@ -82,12 +105,16 @@ getData().then(function (data) {
             document.querySelectorAll(".bold.city-time")[cityItems].innerHTML = dateTime(timezone, 'time') + ' ' + (dateTime(timezone, 'period')).toUpperCase(), 1000);
     }
 
-    //update details of each  cityCards in scroll
+    /**
+     * To update details of each  cityCards in scroll
+     * @param {Object} resultCity 
+     * @param {String} option 
+     */
     function updateCityCard(resultCity, option) {
         clearsetInterval.call();
         document.querySelector('.card-list').innerHTML = '';
-        arrowIcon[0].style.display = 'initial';
-        arrowIcon[1].style.display = 'initial';
+        arrowIcon[0].style.visibility = 'initial';
+        arrowIcon[1].style.visibility = 'initial';
         let cityItems = 0;
         for (let items in resultCity) {
             if (cityItems >= 10)
@@ -95,7 +122,7 @@ getData().then(function (data) {
             assignValues.apply(resultCity[items], [cityItems, option]);
             cityItems++;
         }
-        if (cityItems < 4)      //disable the spinner
+        if (cityItems < 3)      //disable the spinner
             cityCount.disabled = 'disabled';
         else
             cityCount.disabled = '';
@@ -104,7 +131,10 @@ getData().then(function (data) {
         arrow(cityItems);           //call arrow function to disappear or visible arrrow
     }
 
-    //sort city based 
+    /**
+     * To sort City based on preference
+     * @param {Event} e 
+     */
     function sortCities(e) {
         let resultCity = {};
         resultCity = Object.keys(data)
@@ -126,7 +156,11 @@ getData().then(function (data) {
                 return obj;
             }, {});
 
-        //sort obtained cities based on property values(temperature ,precipitation,humidity) most to least
+        /**
+         * To sort obtained cities based on property values(temperature ,precipitation,humidity) most to least
+         * @param {Object} obj 
+         * @param {String} option 
+         */
         const sortKeys = (obj, option) => {
             return Object.assign(...Object.entries(obj).sort((object1, object2) => {
                 let optionValue1 = object1[1][option];
@@ -154,7 +188,7 @@ getData().then(function (data) {
         updateCityCard(resultCity, e.target.value);
     }
 
-    //adding event Listener to elements
+
     for (let icons of preferenceIcons) {
         icons.addEventListener('change', sortCities);
         icons.dispatchEvent(new Event("change"));   //to trigger programatically
