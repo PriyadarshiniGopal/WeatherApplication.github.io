@@ -2,7 +2,7 @@ import { celciusToFahrenheit, dateTime, getData } from "./utility.js";
 let repeat, weatherForecastInterval;
 
 /**
- * To retrieve json data
+ * To retrieve all city details -cityName,dateAndTime,timeZone,temperature,humidity,precipitation,nextFiveHrs
  * @param {JSON} data
  */
 getData().then(function (data) {
@@ -11,6 +11,9 @@ getData().then(function (data) {
     let form = document.getElementById("city-name-form");
     let cityList = document.getElementById("city-list"); // datalist element
     let previousCityName;
+    let time = document.querySelectorAll(".forecast-time");
+    let icon = document.querySelectorAll(".next-weather-icon");
+    let nextTemperature = document.querySelectorAll(".next-temperature");
     list();
 
     /**
@@ -26,26 +29,46 @@ getData().then(function (data) {
     }
 
     /**
-     * To validate city name Input 
+     * To validate city name input box
      */
     function inputValidation() {
         let inputText = cityinput.value;
-        let icon = document.querySelectorAll(".next-weather-icon");
         for (let City in data) {
             if (data[City]['cityName'] === inputText) {
                 for (let index = 0; index < icon.length; index++) {
-                    document.getElementById("error-msg").innerHTML = "";
                     icon[index].style.visibility = "initial";
-                    document.getElementById("selected-city-icon").style.display = "initial";
-                    cityinput.style.border = "none";
                 }
+                document.getElementById("error-msg").innerHTML = "";
+                document.getElementById("selected-city-icon").style.display = "initial";
+                document.getElementById("period").style.display = 'initial';
+                cityinput.style.border = "none";
                 return true;
             }
         }
 
-        // set all border and input message
+        // set all values nil and input error message
         cityinput.style.border = "4px solid red";
+        clearInterval(repeat);
+        clearInterval(weatherForecastInterval);
         document.getElementById("error-msg").innerHTML = "Invalid CityName";
+        document.querySelector(".date").innerHTML = '-- - --- - ----';
+        document.querySelector(".time").innerHTML = '-- : --';
+        document.querySelector(".sec").innerHTML = ' : --';
+        document.getElementById("period").style.display = 'none';
+        document.getElementById("celcius").innerHTML = 'NIL';
+        document.getElementById("selected-city-icon").style.display = 'none';
+        document.getElementById("fahrenheit").innerHTML = 'NIL';
+        document.getElementById("city-humidity").innerHTML = 'NIL';
+        document.getElementById("city-precipitation").innerHTML = 'NIL';
+        for (let index = 0; index < icon.length; index++) {
+            icon[index].style.visibility = "hidden";
+        }
+        for (let index = 0; index < nextTemperature.length; index++) {
+            nextTemperature[index].innerHTML = "NIL";
+        }
+        for (let index = 1; index < time.length; index++) {
+            time[index].innerHTML = "NIL";
+        }
         return false;
     }
 
@@ -62,7 +85,7 @@ getData().then(function (data) {
     }
 
     /**
-     * To update next 5 hour weather
+     * To find next 5 hour weather 
      * @param {String} hour 
      */
     function nextHour(hour) {
@@ -92,9 +115,6 @@ getData().then(function (data) {
      */
     function weather(cityName, timezone) {
         let hour = (dateTime(timezone, 'hour')) + "" + (dateTime(timezone, 'period')).toUpperCase();
-        let time = document.querySelectorAll(".forecast-time");
-        let icon = document.querySelectorAll(".next-weather-icon");
-        let nextTemperature = document.querySelectorAll(".next-temperature");
         for (let child of time) {
             if (child !== time[0]) {
                 hour = nextHour(hour);  // find next hour
