@@ -113,9 +113,10 @@
 }
 
 .city-detail-card:hover {
-  animation: background-color 3s forwards;
+  background-color: rgb(143, 142, 142);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  border: white solid 2px;
   cursor: pointer;
   transform: scale(1.1);
   z-index: 2;
@@ -124,17 +125,6 @@
 .city-detail-card:hover * {
   color: black;
   font-weight: bold;
-}
-
-@keyframes background-color {
-  from {
-    background-color: rgb(101, 139, 138);
-    border: white solid 2px;
-  }
-  to {
-    background-color: rgb(159, 159, 194);
-    border: white dashed 2px;
-  }
 }
 
 .arrow {

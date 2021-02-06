@@ -79,8 +79,7 @@ getData().then(function (data) {
                     else
                         return temperature1 < temperature2 ? 1 : -1;
                 }
-                else
-                    return null;
+                return null;
             })
                 .map(([key, value]) => {
                     return {
@@ -92,12 +91,12 @@ getData().then(function (data) {
         if (e.target.alt === 'downarrow') {
             e.target.alt = 'uparrow';
             e.target.src = './assets/icons/general/arrowUp.svg';
-            e.target.setAttribute('title', 'toggle for ascending order');
+            e.target.setAttribute('title', 'Toggle for descending order');
         }
         else {
             e.target.alt = 'downarrow';
             e.target.src = './assets/icons/general/arrowDown.svg';
-            e.target.setAttribute('title', 'toggle for descending order');
+            e.target.setAttribute('title', 'Toggle for ascending order');
         }
         clearsetInterval();
         let index = 0;
@@ -110,7 +109,7 @@ getData().then(function (data) {
         }
     }
     for (let icon of sortIcon) {
-        icon.addEventListener('click', sortCity);
+        icon.addEventListener('click', sortCity);      //add event listener of icons
         icon.dispatchEvent(new Event('click'));
     }
 });

@@ -59,14 +59,14 @@ getData().then(function (data) {
      * To scroll left city list
      */
     function scrollLeft() {
-        this.scrollLeft -= cityList.clientWidth;
+        this.scrollLeft -= this.clientWidth;
     }
 
     /**
      * To scroll right city list
      */
     function scrollRight() {
-        this.scrollLeft += cityList.clientWidth;
+        this.scrollLeft += this.clientWidth;
     }
 
     /**
@@ -122,7 +122,7 @@ getData().then(function (data) {
             assignValues.apply(resultCity[items], [cityItems, option]);
             cityItems++;
         }
-        if (cityItems < 3)      //disable the spinner
+        if (cityItems < 4)      //disable the spinner
             cityCount.disabled = 'disabled';
         else
             cityCount.disabled = '';
