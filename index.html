@@ -1,183 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="preferenceort" content="width=device-width,initial-scale=1">
-        <meta name="preferenceiption" content="Weather Information for cities">
-        <meta name="preferencerds" content="weather,climate,rain">
-        <link rel="shortcut icon" href="./assets/icons/weather/sunnyIcon.svg" type="image/x-icon">
-        <link rel="stylesheet"  href="./styles/style.css"/>
-        <title>Weather Report</title>
-        <script type="module" src="./scripts/main.js" defer></script>
-    </head>
-    <body>
-        <section class="top-section">
-            <div class="city-selection">
-                <!-- City Icon -->
-                <div class="city-icon">
-                    <img alt="city-icon" id="selected-city-icon" class="selected-city-icon" src="./assets/icons/Cities/newyork.svg">
-                </div>
-                <!-- City Selection Input -->
-                <form class="selected-city" id="city-name-form">
-                    <span id="error-msg"></span>
-                    <input list="city-list" id="city" value="Maseru">
-                    <datalist id="city-list">
-                    </datalist>
-                    <span class="tooltiptext">City selction</span>
-                </form>
-                <div class="empty-element">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="preferenceort" content="width=device-width,initial-scale=1">
+    <meta name="preferenceiption" content="Weather Information for cities">
+    <meta name="preferencerds" content="weather,climate,rain">
+    <link rel="shortcut icon" href="./assets/icons/weather/sunnyIcon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/style.css" />
+    <title>Weather Report</title>
+    <script type="module" src="./scripts/main.js" defer></script>
+</head>
+
+<body>
+    <section class="top-section">
+        <div class="city-selection">
+            <!-- City Icon -->
+            <div class="city-icon">
+                <img alt="city-icon" id="selected-city-icon" class="selected-city-icon"
+                    src="./assets/icons/Cities/newyork.svg">
+            </div>
+            <!-- City Selection Input -->
+            <form class="selected-city" id="city-name-form">
+                <span id="error-msg"></span>
+                <input list="city-list" id="city" value="Maseru">
+                <datalist id="city-list">
+                </datalist>
+                <span class="tooltiptext">City selction</span>
+            </form>
+            <div class="empty-element">
+
+            </div>
+            <!-- Current Date and Time -->
+            <div>
+                <div class="current-time">
+                    <span class="time">10 : 10</span>
+                    <span class="sec"> : 44</span>
+                    <img alt="AM" id="period" src="./assets/icons/general/amState.svg">
                 </div>
-                <!-- Current Date and Time -->
-                <div>
-                    <div class="current-time">
-                        <span class="time">10 : 10</span>
-                        <span class="sec"> : 44</span>
-                        <img alt="AM" id="period" src="./assets/icons/general/amState.svg">
-                    </div>
-                    <p class="date">01-Mar-2020</p>
+                <p class="date">01-Mar-2020</p>
+            </div>
+        </div>
+        <!--Temperature and humidity precipitation -->
+        <div class="city-weather">
+            <div class="temp-celcius">
+                <p>Temp &deg;C</p>
+                <p class="thick" id="celcius">25 &deg;C</p>
+            </div>
+            <div class="humidity-value">
+                <p>Humidity</p>
+                <p class="thick" id="city-humidity">25 %</p>
+            </div>
+            <div class="temp-fahrenheit">
+                <p>Temp F</p>
+                <p class="thick" id="fahrenheit">78 F</p>
+            </div>
+            <div class="precipitation">
+                <p>Precipitation</p>
+                <p class="thick" id="city-precipitation">0 %</p>
+            </div>
+        </div>
+        <!-- weather condition for 4 hours -->
+        <div class="weather-forecast">
+            <div class="weather-forecast-time">
+                <div class="forecast-time">Now</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/windyIcon.svg">
+                <p class="next-temperature">7</p>
+            </div>
+            <div class="vertical-line weather-forecast-time">
+                |
+            </div>
+            <div class="weather-forecast-time">
+                <div class="forecast-time">11AM</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg">
+                <p class="next-temperature">6</p>
+            </div>
+            <div class="vertical-line weather-forecast-time">
+                |
+            </div>
+            <div class="weather-forecast-time">
+                <div class="forecast-time">12PM</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/sunnyIcon.svg">
+                <p class="next-temperature">8</p>
+            </div>
+            <div class="vertical-line weather-forecast-time">
+                |
+            </div>
+            <div class="weather-forecast-time">
+                <div class="forecast-time">1PM</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg">
+                <p class="next-temperature">6</p>
+            </div>
+            <div class="vertical-line weather-forecast-time">
+                |
+            </div>
+            <div class="weather-forecast-time">
+                <div class="forecast-time">2PM</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/rainyIcon.svg">
+                <p class="next-temperature">7</p>
+            </div>
+            <div class="vertical-line weather-forecast-time">
+                |
+            </div>
+            <div class="weather-forecast-time">
+                <div class="forecast-time">3PM</div>
+                <p>|</p>
+                <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/humidityIcon.svg">
+                <p class="next-temperature">4</p>
+            </div>
+        </div>
+    </section>
+    <section class="middle-section">
+        <div class="header">
+            <!--preference selection header-->
+            <div class="header-text">
+                Top cities around world
+            </div>
+            <span class="preference">
+                <label class="preference-selection-icon">
+                    <input type="radio" name="preference" value="sunny" />
+                    <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg">
+                </label>
+                <label class="preference-selection-icon">
+                    <input type="radio" name="preference" value="snowflake" />
+                    <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg">
+                </label>
+                <label class="preference-selection-icon">
+                    <input type="radio" name="preference" value="rainy" checked />
+                    <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg">
+                </label>
+                <label class="city-count-selection">
+                    Display Top:
+                    <input type="number" id="city-count" min="3" max="10" value='10'>
+                </label>
+            </span>
+        </div>
+        <div class="city-card">
+            <!-- list of cities according to selection with arrow -->
+            <div class="arrow">
+                <img alt="leftarrow" class="center" src="./assets/icons/general/backwardArrow.svg">
+            </div>
+            <div class="city-card-scroll">
+                <div class="card-list">
+                    <!-- list of cities -->
                 </div>
             </div>
-            <!--Temperature and humidity precipitation -->
-            <div class="city-weather">
-                <div class="temp-celcius">
-                    <p>Temp &deg;C</p>
-                    <p class="thick" id="celcius">25 &deg;C</p>
-                </div>
-                <div class="humidity-value">
-                    <p>Humidity</p>
-                    <p class="thick" id="city-humidity">25 %</p>
-                </div>
-                <div class="temp-fahrenheit">
-                    <p>Temp F</p>
-                    <p class="thick" id="fahrenheit">78 F</p>
-                </div>
-                <div class="precipitation">
-                    <p>Precipitation</p>
-                    <p class="thick" id="city-precipitation">0 %</p>
-                </div>
+            <div class="arrow">
+                <img alt="rightarrow" class="center" src="./assets/icons/general/forwardArrow.svg">
             </div>
-            <!-- weather condition for 4 hours -->
-            <div class="weather-forecast">
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">Now</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/windyIcon.svg" >
-                    <p class="next-temperature">7</p>
-                </div>
-                <div class="vertical-line weather-forecast-time">
-                    |
-                </div>
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">11AM</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p class="next-temperature">6</p>
-                </div>
-                <div class="vertical-line weather-forecast-time">
-                    |
-                </div>
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">12PM</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/sunnyIcon.svg" >
-                    <p class="next-temperature">8</p>
-                </div>
-                <div class="vertical-line weather-forecast-time">
-                    |
-                </div>
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">1PM</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/cloudyIcon.svg" >
-                    <p class="next-temperature">6</p>
-                </div>
-                <div class="vertical-line weather-forecast-time">
-                    |
-                </div>
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">2PM</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/rainyIcon.svg" >
-                    <p class="next-temperature">7</p>
-                </div>
-                <div class="vertical-line weather-forecast-time">
-                    |
-                </div>
-                <div class="weather-forecast-time">
-                    <div class="forecast-time">3PM</div>
-                    <p>|</p>
-                    <img alt="icons" class="next-weather-icon" src="./assets/icons/weather/humidityIcon.svg" >
-                    <p class="next-temperature">4</p>
-                </div>
-            </div>
-        </section>
-        <section class="middle-section">
-            <div class="header">
-                <!--preference selection header-->
-                <div class="header-text">
-                    Top cities around world
-                </div>
-                <span class="preference">
-                    <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="sunny"  />    
-                        <img alt="sunny" src="./assets/icons/weather/sunnyIcon.svg" >
-                    </label>
-                    <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="snowflake"  />    
-                        <img alt="cold" src="./assets/icons/weather/snowflakeIcon.svg" >
-                    </label>
-                    <label class="preference-selection-icon">
-                        <input type="radio" name="preference" value="rainy"  checked/>    
-                        <img alt="rainy" src="./assets/icons/weather/rainyIcon.svg" >
-                    </label>
-                    <label class="city-count-selection">
-                        Display Top: 
-                        <input type="number" id="city-count" min="3" max="10" value='10'>
-                    </label>
-                </span>
-            </div>
-           <div class="city-card">
-               <!-- list of cities according to selection with arrow -->
-                <div class="arrow">
-                    <img alt="leftarrow" class="center" src="./assets/icons/general/backwardArrow.svg"  >
-                </div>
-                <div class="city-card-scroll">
-                    <div class="card-list">
-                        <!-- list of cities -->
-                    </div>
-                </div>
-                <div class="arrow">
-                    <img alt="rightarrow" class="center" src="./assets/icons/general/forwardArrow.svg"  >
-                </div>
-            </div>
-        </section>
-        <section class="bottom-section">
-            <!-- Bottom section  -->
-            <div class="sorting-bar">
-                <span class="medium title">Cities across continents at a Glance</span>
-                <span class="sorting">
-                    <!-- continent and temperature sorting -->
-                    <span class="continent-sorting">
-                        <span>Continent Name</span>
-                        <span>
-                            <img alt="downarrow" name="sort-icon" value="continent" src="./assets/icons/general/arrowDown.svg" title='toggle for descending order'>
-                        </span>
-                    </span>
-                    <span class="temperature-sorting">
-                        <span>Temperature</span>
-                        <span>  
-                            <img alt="uparrow" name="sort-icon" value="temperature"  src="./assets/icons/general/arrowUp.svg" title='toggle for ascending order'>
-                        </span>
+        </div>
+    </section>
+    <section class="bottom-section">
+        <!-- Bottom section  -->
+        <div class="sorting-bar">
+            <span class="medium title">Cities across continents at a Glance</span>
+            <span class="sorting">
+                <!-- continent and temperature sorting -->
+                <span class="continent-sorting">
+                    <span>Continent Name</span>
+                    <span>
+                        <img alt="downarrow" name="sort-icon" value="continent"
+                            src="./assets/icons/general/arrowDown.svg" title='toggle for descending order'>
                     </span>
                 </span>
+                <span class="temperature-sorting">
+                    <span>Temperature</span>
+                    <span>
+                        <img alt="uparrow" name="sort-icon" value="temperature" src="./assets/icons/general/arrowUp.svg"
+                            title='toggle for ascending order'>
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div class="continent-city-list">
+            <!-- list of continent nad cities -->
+        </div>
+    </section>
+    <footer>
+        <section class="rating-section">
+            <hr>
+            <p name="rating-text">Give your valuable FeedBack</p>
+            <div class="rating">
+                <div class="clip-star" star='1'></div>
+                <div class="clip-star" star='2'></div>
+                <div class="clip-star" star='3'></div>
+                <div class="clip-star" star='4'></div>
+                <div class="clip-star" star='5'></div>
             </div>
-            <div class="continent-city-list">
-                <!-- list of continent nad cities -->                
+            <div id="rating-error-msg"></div>
+            <button class="rating-button">Rate</button>
+            <p name="rating-average"></p>
+            <div class="row">
+                <div class="side">
+                    <div>5 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-5"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>150</div>
+                </div>
+                <div class="side">
+                    <div>4 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-4"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>63</div>
+                </div>
+                <div class="side">
+                    <div>3 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-3"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>15</div>
+                </div>
+                <div class="side">
+                    <div>2 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-2"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>6</div>
+                </div>
+                <div class="side">
+                    <div>1 star</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-1"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>20</div>
+                </div>
             </div>
         </section>
-        <footer>
+    </footer>
+</body>
 
-        </footer>
-    </body>
 </html>

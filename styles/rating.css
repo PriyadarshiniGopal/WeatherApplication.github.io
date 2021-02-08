@@ -1,0 +1,86 @@
+.rating-section {
+  background: black;
+  line-height: 2.5rem;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.clip-star {
+  background: white;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+
+.rating-button {
+  background-color: #a3a3a3;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  margin-top: 10px;
+  float: left;
+  width: 70%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+.bar-5 {
+  height: 18px;
+  background-color: #4caf50;
+}
+.bar-4 {
+  height: 18px;
+  background-color: #2196f3;
+}
+.bar-3 {
+  height: 18px;
+  background-color: #00bcd4;
+}
+.bar-2 {
+  height: 18px;
+  background-color: #ff9800;
+}
+.bar-1 {
+  height: 18px;
+  background-color: #f44336;
+}
