@@ -136,8 +136,8 @@ body {
 }
 
 .weather-forecast img {
-  width: 50%;
-  height: 40%;
+  width: 2rem;
+  height: 4.5rem;
 }
 
 .forecast-time {
