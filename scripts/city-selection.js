@@ -50,6 +50,7 @@ getCityData().then(function (retrieveData) {
                 return;
             }
             city = new selectedCity(cityObject);
+            cityName = cityName.toLowerCase();
             document.getElementById("celcius").innerHTML = city.temperature;
             document.getElementById("selected-city-icon").src = (`./assets/icons/Cities/${cityName}.svg`);
             document.getElementById("fahrenheit").innerHTML = celciusToFahrenheit(city.temperature);
