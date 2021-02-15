@@ -21,7 +21,7 @@
                     src="./assets/icons/Cities/newyork.svg">
             </div>
             <!-- City Selection Input -->
-            <form class="selected-city" id="city-name-form">
+            <form class="selected-city" id="city-name-form" onsubmit="return false">
                 <span id="error-msg"></span>
                 <input list="city-list" id="city" value="Maseru">
                 <datalist id="city-list">
@@ -165,14 +165,14 @@
                     <span>Continent Name</span>
                     <span>
                         <img alt="downarrow" name="sort-icon" value="continent"
-                            src="./assets/icons/general/arrowDown.svg" title='toggle for descending order'>
+                            src="./assets/icons/general/arrowDown.svg" title='Toggle for ascending order'>
                     </span>
                 </span>
                 <span class="temperature-sorting">
                     <span>Temperature</span>
                     <span>
                         <img alt="uparrow" name="sort-icon" value="temperature" src="./assets/icons/general/arrowUp.svg"
-                            title='toggle for ascending order'>
+                            title='Toggle for descending order'>
                     </span>
                 </span>
             </span>
@@ -182,77 +182,6 @@
         </div>
     </section>
     <footer>
-        <section class="rating-section">
-            <hr>
-            <p name="rating-text">Give your valuable FeedBack</p>
-            <div class="rating">
-                <div class="clip-star" star='1'></div>
-                <div class="clip-star" star='2'></div>
-                <div class="clip-star" star='3'></div>
-                <div class="clip-star" star='4'></div>
-                <div class="clip-star" star='5'></div>
-            </div>
-            <div id="rating-error-msg"></div>
-            <button class="rating-button">Rate</button>
-            <p name="rating-average"></p>
-            <div class="row">
-                <div class="side">
-                    <div>5 star</div>
-                </div>
-                <div class="middle">
-                    <div class="bar-container">
-                        <div class="bar-5"></div>
-                    </div>
-                </div>
-                <div class="side right">
-                    <div>150</div>
-                </div>
-                <div class="side">
-                    <div>4 star</div>
-                </div>
-                <div class="middle">
-                    <div class="bar-container">
-                        <div class="bar-4"></div>
-                    </div>
-                </div>
-                <div class="side right">
-                    <div>63</div>
-                </div>
-                <div class="side">
-                    <div>3 star</div>
-                </div>
-                <div class="middle">
-                    <div class="bar-container">
-                        <div class="bar-3"></div>
-                    </div>
-                </div>
-                <div class="side right">
-                    <div>15</div>
-                </div>
-                <div class="side">
-                    <div>2 star</div>
-                </div>
-                <div class="middle">
-                    <div class="bar-container">
-                        <div class="bar-2"></div>
-                    </div>
-                </div>
-                <div class="side right">
-                    <div>6</div>
-                </div>
-                <div class="side">
-                    <div>1 star</div>
-                </div>
-                <div class="middle">
-                    <div class="bar-container">
-                        <div class="bar-1"></div>
-                    </div>
-                </div>
-                <div class="side right">
-                    <div>20</div>
-                </div>
-            </div>
-        </section>
     </footer>
 </body>
 

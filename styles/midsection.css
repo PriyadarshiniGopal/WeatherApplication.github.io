@@ -152,11 +152,6 @@
   width: 60%;
 }
 
-.temperature-detail img,
-.temperature-detail span {
-  vertical-align: middle;
-}
-
 .city-card-scroll::-webkit-scrollbar {
   display: none;
 }
