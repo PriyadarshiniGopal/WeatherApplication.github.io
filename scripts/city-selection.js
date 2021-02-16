@@ -65,7 +65,7 @@ getCityData().then(function (retrieveData) {
                 clearInterval(weatherForecastInterval);
             }
             city.weather(time, nextTemperature, icon);
-            weatherForecastInterval = setInterval(() => city.weather(time, nextTemperature, icon), 1000,);
+            weatherForecastInterval = setInterval(() => city.weather(time, nextTemperature, icon), 3600000,);
             previousCityName = cityInput.value;
         }
 
@@ -142,6 +142,6 @@ getCityData().then(function (retrieveData) {
         form.dispatchEvent(new Event("input"));
     }
     catch (error) {
-        console.log("Something went wrong " + error);
+        alert("Something went wrong " + error);
     }
 });

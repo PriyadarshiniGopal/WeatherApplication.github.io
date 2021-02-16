@@ -126,6 +126,6 @@ getCityData().then(function (retrieveData) {
         }
     }
     catch (error) {
-        console.log("something went wrong" + error);
+        alert("something went wrong" + error);
     }
 });

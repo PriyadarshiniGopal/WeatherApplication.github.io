@@ -10,8 +10,8 @@ export const getCityData = async () => {
 
     await fetch("https://soliton.glitch.me/all-timezone-cities", requestOptions)
         .then(response => response.text())
-        .then((result) => cityData = result)
-        .catch((error) => console.error(error));
+        .then(result => cityData = result)
+        .catch(() => alert("Cannot Fetch City Details"));
     return cityData;
 }
 
@@ -27,8 +27,8 @@ export const getCityDateAndTime = async (cityName) => {
 
     await fetch(`https://soliton.glitch.me?city=${cityName}`, requestOptions)
         .then(response => response.text())
-        .then((result) => dateAndTime = result)
-        .catch(error => console.log('error', error));
+        .then(result => dateAndTime = result)
+        .catch(() => alert("Cannot Fetch City Date and Time"));
     return dateAndTime;
 }
 
@@ -51,7 +51,7 @@ export const getWeather = async (cityDateTimeName, N) => {
 
     await fetch("https://soliton.glitch.me/hourly-forecast", requestOptions)
         .then(response => response.text())
-        .then((result) => weather = result)
-        .catch(error => console.log('error', error));
+        .then(result => weather = result)
+        .catch(() => alert("Cannot Fetch City Weather Forecast "));
     return weather;
 }
