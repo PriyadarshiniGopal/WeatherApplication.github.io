@@ -35,7 +35,9 @@ export const getCityDateAndTime = async (cityName) => {
 /**
  * To get weather for next N hours
  */
-export const getWeather = async (cityDateTimeName, N) => {
+export const getWeather = async (cityName, N) => {
+    let cityDateTimeName = await getCityDateAndTime(cityName);
+    cityDateTimeName = await JSON.parse(cityDateTimeName).city_Date_Time_Name;
     let weather;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
