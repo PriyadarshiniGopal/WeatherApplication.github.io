@@ -38,7 +38,7 @@ export class selectedCity extends cityDetails {
     /**
      * to update next 5 hours weather forecast details
      */
-    weather(time, nextTemperature, icon) {
+    async weather(time, nextTemperature, icon) {
         let hour = (dateTime(this.timeZone, 'hour')) + "" + (dateTime(this.timeZone, 'period')).toUpperCase();
         for (let child of time) {
             if (child !== time[0]) {
@@ -46,8 +46,11 @@ export class selectedCity extends cityDetails {
                 child.textContent = hour;
             }
         }
-        let temperature;
-        getWeather(this.cityName, 5).then((nextFiveHrsdata) => {
+        let temperature, dateAndTime;
+        await getCityDateAndTime(this.cityName).then((CityDateAndTime) => {
+            dateAndTime = JSON.parse(CityDateAndTime).city_Date_Time_Name;
+        });
+        await getWeather(dateAndTime, 5).then((nextFiveHrsdata) => {
             let nextFiveHrs = JSON.parse(nextFiveHrsdata).temperature;
             for (let index = 0; index < nextTemperature.length; index++) { // update temperature for next hours
                 if (index == 0)

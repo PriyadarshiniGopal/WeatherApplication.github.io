@@ -17,121 +17,131 @@ let nextTemperature = document.querySelectorAll(".next-temperature");
  * @param {JSON} data
  */
 getCityData().then(function (retrieveData) {
-    data = JSON.parse(retrieveData);
+    try {
+        function updateInstance() {
+            data = JSON.parse(retrieveData);
 
-    /**
-     * To add option dynamically for city selection input
-     */
-    for (let city of data) {
-        let eachCity = new cityDetails(city);
-        cities.push(eachCity);
-        let option = document.createElement('option');
-        option.value = cities[cities.length - 1].cityName;  // update options from json key value
-        cityList.appendChild(option);
-    }
-
-    /**
-     * event Handler to change topsection 
-     */
-    function topSection() {
-        let city, cityObject;
-        let cityName = cityInput.value;
-        for (let city of data) {
-            if (city.cityName == cityName) {
-                cityObject = city;
+            /**
+             * To add option dynamically for city selection input
+             */
+            for (let city of data) {
+                let eachCity = new cityDetails(city);
+                cities.push(eachCity);
+                let option = document.createElement('option');
+                option.value = cities[cities.length - 1].cityName;  // update options from json key value
+                cityList.appendChild(option);
             }
         }
-        if (!inputValidation()) {
-            return;
-        }
-        city = new selectedCity(cityObject);
-        document.getElementById("celcius").innerHTML = city.temperature;
-        document.getElementById("selected-city-icon").src = (`./assets/icons/Cities/${cityName}.svg`);
-        document.getElementById("fahrenheit").innerHTML = celciusToFahrenheit(city.temperature);
-        document.getElementById("city-humidity").innerHTML = city.humidity;
-        document.getElementById("city-precipitation").innerHTML = city.precipitation;
-        if (repeat) {
-            clearInterval(repeat);
-        }
-        city.clock();
-        repeat = setInterval(() => city.clock(), 1000);    // set interval to update time
-        if (weatherForecastInterval) {
-            clearInterval(weatherForecastInterval);
-        }
-        city.weather(time, nextTemperature, icon);
-        weatherForecastInterval = setInterval(() => city.weather(time, nextTemperature, icon), 3600000);
-        previousCityName = cityInput.value;
-    }
-
-
-    /**
-     * To validate city name input box
-     */
-    function inputValidation() {
-        let inputText = cityInput.value;
-        for (let index = 0; index < cities.length; index++) {
-            if (cities[index].cityName === inputText) {
-                cityInput.style.border = "none";
-                for (let imageIndex = 0; imageIndex < icon.length; imageIndex++) {
-                    icon[imageIndex].style.visibility = "initial";
+        updateInstance();
+        // fetch city details every four hours
+        setInterval(updateInstance, 14400000);
+        /**
+         * event Handler to change topsection 
+         */
+        function topSection() {
+            let city, cityObject;
+            let cityName = cityInput.value;
+            for (let city of data) {
+                if (city.cityName == cityName) {
+                    cityObject = city;
                 }
-                document.getElementById("error-msg").innerHTML = "";
-                document.getElementById("selected-city-icon").style.display = "initial";
-                document.getElementById("period").style.display = 'initial';
-                cityInput.style.border = "none";
-                return true;
+            }
+            if (!inputValidation()) {
+                return;
+            }
+            city = new selectedCity(cityObject);
+            cityName = cityName.toLowerCase();
+            document.getElementById("celcius").innerHTML = city.temperature;
+            document.getElementById("selected-city-icon").src = (`./assets/icons/Cities/${cityName}.svg`);
+            document.getElementById("fahrenheit").innerHTML = celciusToFahrenheit(city.temperature);
+            document.getElementById("city-humidity").innerHTML = city.humidity;
+            document.getElementById("city-precipitation").innerHTML = city.precipitation;
+            if (repeat) {
+                clearInterval(repeat);
+            }
+            city.clock();
+            repeat = setInterval(() => city.clock(), 1000,);    // set interval to update time
+            if (weatherForecastInterval) {
+                clearInterval(weatherForecastInterval);
+            }
+            city.weather(time, nextTemperature, icon);
+            weatherForecastInterval = setInterval(() => city.weather(time, nextTemperature, icon), 3600000,);
+            previousCityName = cityInput.value;
+        }
+
+
+        /**
+         * To validate city name input box
+         */
+        function inputValidation() {
+            let inputText = cityInput.value;
+            for (let index = 0; index < cities.length; index++) {
+                if (cities[index].cityName === inputText) {
+                    cityInput.style.border = "none";
+                    for (let imageIndex = 0; imageIndex < icon.length; imageIndex++) {
+                        icon[imageIndex].style.visibility = "initial";
+                    }
+                    document.getElementById("error-msg").innerHTML = "";
+                    document.getElementById("selected-city-icon").style.display = "initial";
+                    document.getElementById("period").style.display = 'initial';
+                    cityInput.style.border = "none";
+                    return true;
+                }
+            }
+            // set all values nil and input error message
+            cityInput.style.border = "4px solid red";
+            clearInterval(repeat);
+            clearInterval(weatherForecastInterval);
+            document.getElementById("error-msg").innerHTML = "Invalid CityName";
+            document.querySelector(".date").innerHTML = '-- - --- - ----';
+            document.querySelector(".time").innerHTML = '-- : --';
+            document.querySelector(".sec").innerHTML = ' : --';
+            document.getElementById("period").style.display = 'none';
+            document.getElementById("celcius").innerHTML = 'NIL';
+            document.getElementById("selected-city-icon").style.display = 'none';
+            document.getElementById("fahrenheit").innerHTML = 'NIL';
+            document.getElementById("city-humidity").innerHTML = 'NIL';
+            document.getElementById("city-precipitation").innerHTML = 'NIL';
+            for (let index = 0; index < icon.length; index++) {
+                icon[index].style.visibility = "hidden";
+            }
+            for (let index = 0; index < nextTemperature.length; index++) {
+                nextTemperature[index].innerHTML = "NIL";
+            }
+            for (let index = 1; index < time.length; index++) {
+                time[index].innerHTML = "NIL";
+            }
+            return false;
+        }
+
+        /**
+         * set previous city name if current city name is invalid
+         */
+        function setPreviousCityName() {
+            if (!inputValidation()) {
+                cityInput.value = previousCityName;
+                topSection();
             }
         }
-        // set all values nil and input error message
-        cityInput.style.border = "4px solid red";
-        clearInterval(repeat);
-        clearInterval(weatherForecastInterval);
-        document.getElementById("error-msg").innerHTML = "Invalid CityName";
-        document.querySelector(".date").innerHTML = '-- - --- - ----';
-        document.querySelector(".time").innerHTML = '-- : --';
-        document.querySelector(".sec").innerHTML = ' : --';
-        document.getElementById("period").style.display = 'none';
-        document.getElementById("celcius").innerHTML = 'NIL';
-        document.getElementById("selected-city-icon").style.display = 'none';
-        document.getElementById("fahrenheit").innerHTML = 'NIL';
-        document.getElementById("city-humidity").innerHTML = 'NIL';
-        document.getElementById("city-precipitation").innerHTML = 'NIL';
-        for (let index = 0; index < icon.length; index++) {
-            icon[index].style.visibility = "hidden";
-        }
-        for (let index = 0; index < nextTemperature.length; index++) {
-            nextTemperature[index].innerHTML = "NIL";
-        }
-        for (let index = 1; index < time.length; index++) {
-            time[index].innerHTML = "NIL";
-        }
-        return false;
-    }
 
-    /**
-     * set previous city name if current city name is invalid
-     */
-    function setPreviousCityName() {
-        if (!inputValidation()) {
-            cityInput.value = previousCityName;
-            topSection();
+        /**
+         * To list all options
+         * @param {Event} e 
+         */
+        function listCity(e) {
+            if (e.target.selectionStart !== 0)
+                return;
+            cityInput.setAttribute('placeholder', previousCityName);
+            cityInput.value = '';
         }
-    }
 
-    /**
-     * To list all options
-     * @param {Event} e 
-     */
-    function listCity(e) {
-        if (e.target.selectionStart !== 0)
-            return;
-        cityInput.setAttribute('placeholder', previousCityName);
-        cityInput.value = '';
+        cityInput.addEventListener('blur', setPreviousCityName);
+        cityInput.addEventListener('click', listCity);
+        cityInput.addEventListener('input', inputValidation);
+        form.addEventListener('input', topSection);
+        form.dispatchEvent(new Event("input"));
     }
-
-    cityInput.addEventListener('blur', setPreviousCityName);
-    cityInput.addEventListener('click', listCity);
-    cityInput.addEventListener('input', inputValidation);
-    form.addEventListener('input', topSection);
-    form.dispatchEvent(new Event("input"));
+    catch (error) {
+        alert("Something went wrong " + error);
+    }
 });
